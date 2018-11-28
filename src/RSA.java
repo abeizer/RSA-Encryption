@@ -9,10 +9,7 @@ import java.util.Random;
 public class RSA 
 {
 
-	public RSA()
-	{
-		
-	}
+	public RSA(){}
 	
 	/**
 	 * Driver to test RSA encryption
@@ -20,6 +17,7 @@ public class RSA
 	public static void main(String[] args)
 	{
 		show(new long[]{101, 504, 66, -826});
+		
 	}
 	
 	/**
@@ -77,7 +75,44 @@ public class RSA
 	 */
 	public static long randPrime(int m, int n, Random rand)
 	{
+		int p = 0;
+		do 
+		{
+			p = rand.nextInt(n) + m;
+			
+		}while(!isPrime(p));
 		return -1;
+	}
+	
+	/**
+	 * Evaluates whether a given number is a prime
+	 * @param p
+	 * @return true if p is prime
+	 */
+	public static boolean isPrime(int p)
+	{
+		// Case: less than 2
+		if(p < 2)
+			return false;
+		
+		// Case: equals 2, 3, or 5
+		if(p == 2 || p == 3 || p == 5)
+			return true;
+		
+		// Case: Divisible by 2, by 3, or by 5
+		if(p % 2 == 0 || p % 3 == 0 || p % 5 == 0)
+			return false;
+		
+		// else
+		
+		int max = (int) Math.sqrt(p) + 1;
+		for(int i = 7; i <= max; i += 2)
+		{
+			if(p % i == 0)
+				return false;
+		}
+		
+		return true;
 	}
 	
 	

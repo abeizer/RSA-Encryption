@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Random;
 
 class UnitTests {
 
@@ -71,6 +72,19 @@ class UnitTests {
 		assertEquals(false, rsa.isPrime(49010));
 		assertEquals(false, rsa.isPrime(49007));
 		assertEquals(false, rsa.isPrime(2147483646));
+	}
+	
+	@Test
+	void randPrimeTest()
+	{
+		RSA rsa = new RSA();
+		
+		for(int i = 0; i < 20; i++)
+		{
+			long num = rsa.randPrime(50, 8000, new Random());
+			assertEquals(true, rsa.isPrime(num));
+		}
+		
 	}
 
 }

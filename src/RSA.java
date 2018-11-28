@@ -18,6 +18,12 @@ public class RSA
 	{
 		show(new long[]{101, 504, 66, -826});
 		
+		for(int i = 0; i < 10; i++)
+		{
+			System.out.println(randPrime(100, 205, new Random()));
+		}
+		
+		
 	}
 	
 	/**
@@ -67,6 +73,7 @@ public class RSA
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Find a random prime number
 	 * @param m Lower bound of prime's value
 	 * @param n Upper bound of prime's value
@@ -75,21 +82,25 @@ public class RSA
 	 */
 	public static long randPrime(int m, int n, Random rand)
 	{
-		int p = 0;
+		// Get a random number until it is prime
+		// Then return that number
+		long p = 0;
 		do 
 		{
 			p = rand.nextInt(n) + m;
 			
 		}while(!isPrime(p));
-		return -1;
+		
+		return p;
 	}
 	
 	/**
+	 * @author Abby Beizer
 	 * Evaluates whether a given number is a prime
 	 * @param p
 	 * @return true if p is prime
 	 */
-	public static boolean isPrime(int p)
+	public static boolean isPrime(long p)
 	{
 		// Case: less than 2
 		if(p < 2)

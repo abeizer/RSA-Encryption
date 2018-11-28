@@ -19,7 +19,7 @@ public class RSA
 	 */
 	public static void main(String[] args)
 	{
-		
+		show(new long[]{101, 504, 66, -826});
 	}
 	
 	/**
@@ -36,12 +36,22 @@ public class RSA
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Display an array of longs on stdout
 	 * @param cipher The cipher text to display as an array of longs
 	 */
 	public static void show(long[] cipher)
 	{
+		StringBuilder s = new StringBuilder();
+		for(int i = 0; i < cipher.length; i++)
+		{
+			s.append(cipher[i] + " ");
+		}
 		
+		// Remove the trailing space
+		s.delete(s.length() - 1, s.length());
+		
+		System.out.println(s.toString());
 	}
 	
 	

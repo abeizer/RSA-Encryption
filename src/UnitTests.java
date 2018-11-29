@@ -16,8 +16,7 @@ class UnitTests {
 		PrintStream old = System.out;
 		// Use new stream
 		System.setOut(new PrintStream(stdout));
-		RSA rsa = new RSA();
-		rsa.show(new long[] {101, 102, 103, -5, -632145, 183085, 0});
+		RSA.show(new long[] {101, 102, 103, -5, -632145, 183085, 0});
 		
 		// Put things back
 		System.out.flush();
@@ -32,57 +31,55 @@ class UnitTests {
 	@Test
 	void isPrimeTest()
 	{
-		RSA rsa = new RSA();
+
 		
 		// Primes
-		assertEquals(true, rsa.isPrime(2));
-		assertEquals(true, rsa.isPrime(3));
-		assertEquals(true, rsa.isPrime(5));
-		assertEquals(true, rsa.isPrime(7));
-		assertEquals(true, rsa.isPrime(11));
-		assertEquals(true, rsa.isPrime(13));
-		assertEquals(true, rsa.isPrime(17));
-		assertEquals(true, rsa.isPrime(19));
-		assertEquals(true, rsa.isPrime(23));
-		assertEquals(true, rsa.isPrime(29));
-		assertEquals(true, rsa.isPrime(31));
+		assertEquals(true, RSA.isPrime(2));
+		assertEquals(true, RSA.isPrime(3));
+		assertEquals(true, RSA.isPrime(5));
+		assertEquals(true, RSA.isPrime(7));
+		assertEquals(true, RSA.isPrime(11));
+		assertEquals(true, RSA.isPrime(13));
+		assertEquals(true, RSA.isPrime(17));
+		assertEquals(true, RSA.isPrime(19));
+		assertEquals(true, RSA.isPrime(23));
+		assertEquals(true, RSA.isPrime(29));
+		assertEquals(true, RSA.isPrime(31));
 		//etc...
-		assertEquals(true, rsa.isPrime(173));
-		assertEquals(true, rsa.isPrime(199));
-		assertEquals(true, rsa.isPrime(12241));
-		assertEquals(true, rsa.isPrime(49003));
-		assertEquals(true, rsa.isPrime(2147483647));
+		assertEquals(true, RSA.isPrime(173));
+		assertEquals(true, RSA.isPrime(199));
+		assertEquals(true, RSA.isPrime(12241));
+		assertEquals(true, RSA.isPrime(49003));
+		assertEquals(true, RSA.isPrime(2147483647));
 		
 		// Non-primes
-		assertEquals(false, rsa.isPrime(4));
-		assertEquals(false, rsa.isPrime(6));
-		assertEquals(false, rsa.isPrime(8));
-		assertEquals(false, rsa.isPrime(9));
-		assertEquals(false, rsa.isPrime(10));
-		assertEquals(false, rsa.isPrime(12));
-		assertEquals(false, rsa.isPrime(14));
-		assertEquals(false, rsa.isPrime(15));
-		assertEquals(false, rsa.isPrime(16));
-		assertEquals(false, rsa.isPrime(18));
-		assertEquals(false, rsa.isPrime(20));
+		assertEquals(false, RSA.isPrime(4));
+		assertEquals(false, RSA.isPrime(6));
+		assertEquals(false, RSA.isPrime(8));
+		assertEquals(false, RSA.isPrime(9));
+		assertEquals(false, RSA.isPrime(10));
+		assertEquals(false, RSA.isPrime(12));
+		assertEquals(false, RSA.isPrime(14));
+		assertEquals(false, RSA.isPrime(15));
+		assertEquals(false, RSA.isPrime(16));
+		assertEquals(false, RSA.isPrime(18));
+		assertEquals(false, RSA.isPrime(20));
 		// etc...
-		assertEquals(false, rsa.isPrime(81));
-		assertEquals(false, rsa.isPrime(2000000002));
-		assertEquals(false, rsa.isPrime(1555555));
-		assertEquals(false, rsa.isPrime(49010));
-		assertEquals(false, rsa.isPrime(49007));
-		assertEquals(false, rsa.isPrime(2147483646));
+		assertEquals(false, RSA.isPrime(81));
+		assertEquals(false, RSA.isPrime(2000000002));
+		assertEquals(false, RSA.isPrime(1555555));
+		assertEquals(false, RSA.isPrime(49010));
+		assertEquals(false, RSA.isPrime(49007));
+		assertEquals(false, RSA.isPrime(2147483646));
 	}
 	
 	@Test
 	void randPrimeTest()
 	{
-		RSA rsa = new RSA();
-		
 		for(int i = 0; i < 20; i++)
 		{
-			long num = rsa.randPrime(50, 8000, new Random());
-			assertEquals(true, rsa.isPrime(num));
+			long num = RSA.randPrime(50, 8000, new Random());
+			assertEquals(true, RSA.isPrime(num));
 		}
 		
 	}

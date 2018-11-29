@@ -11,6 +11,7 @@ public class RSA
 
 	public RSA(){}
 	
+	
 	/**
 	 * Driver to test RSA encryption
 	 */
@@ -22,9 +23,8 @@ public class RSA
 		{
 			System.out.println(randPrime(100, 205, new Random()));
 		}
-		
-		
-	}
+			
+	}// end main
 	
 	/**
 	 * Find the multiplicative inverse of a long int 
@@ -115,7 +115,6 @@ public class RSA
 			return false;
 		
 		// else
-		
 		int max = (int) Math.sqrt(p) + 1;
 		for(int i = 7; i <= max; i += 2)
 		{
@@ -135,7 +134,32 @@ public class RSA
 	 */
 	public static long relPrime(long n, Random rand)
 	{
-		return -1;
+		// Get a random number until it is relatively prime n
+		// Then return that number
+		long p = 0;
+		do 
+		{
+			p = rand.nextLong();
+			
+		}while(!isRelativelyPrime(n, p));
+		
+		return p;
+	}
+	
+	public static boolean isRelativelyPrime(long a, long b)
+	{
+		// This finds the gcd (greatest common divisor), a
+		long temp;
+		while(b != 0)
+		{
+			temp = b;
+			b = a % b;
+			a = temp;
+		}
+		
+		// a is the gcd
+		// if a == 1, then the two numbers are relatively prime 
+		return (a == 1);
 	}
 	
 	

@@ -84,4 +84,27 @@ class UnitTests {
 		
 	}
 
+	@Test
+	void isRelativelyPrimeTest()
+	{
+		// Numbers that should be relatively prime
+		assertEquals(true, RSA.isRelativelyPrime(5, 7));
+		assertEquals(true, RSA.isRelativelyPrime(2, 3));
+		assertEquals(true, RSA.isRelativelyPrime(9, 4));
+		assertEquals(true, RSA.isRelativelyPrime(3, 11));
+		
+		// Numbers that should not be relatively prime
+		assertEquals(false, RSA.isRelativelyPrime(5, 10));
+		assertEquals(false, RSA.isRelativelyPrime(14, 7));
+		assertEquals(false, RSA.isRelativelyPrime(2, 4));
+		assertEquals(false, RSA.isRelativelyPrime(555, 10));
+		
+		// Order of arguments doesn't matter
+		assertEquals(false, RSA.isRelativelyPrime(100, 25));
+		assertEquals(false, RSA.isRelativelyPrime(25, 100));
+		
+		assertEquals(true, RSA.isRelativelyPrime(10, 11));
+		assertEquals(true, RSA.isRelativelyPrime(11, 10));
+	}
+	
 }

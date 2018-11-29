@@ -19,11 +19,22 @@ public class RSA
 	{
 		show(new long[]{101, 504, 66, -826});
 		
+		/*
 		for(int i = 0; i < 10; i++)
 		{
 			System.out.println(randPrime(100, 205, new Random()));
 		}
-			
+		*/
+		
+		Random rand = new Random();
+		for(int i = 0; i < 10; i++)
+		{
+			long x = (long)(rand.nextDouble()*(2000 - 0));
+			long y = relPrime(x, rand);
+			System.out.println(x + " " + y + " " + isRelativelyPrime(x, y));
+		}
+		
+		
 	}// end main
 	
 	/**
@@ -139,7 +150,7 @@ public class RSA
 		long p = 0;
 		do 
 		{
-			p = rand.nextLong();
+			p = (long)(rand.nextDouble()*(2000 - 0));
 			
 		}while(!isRelativelyPrime(n, p));
 		

@@ -107,4 +107,16 @@ class UnitTests {
 		assertEquals(true, RSA.isRelativelyPrime(11, 10));
 	}
 	
+	@Test
+	void relPrimeTest()
+	{
+		Random rand = new Random();
+		for(int i = 0; i < 20; i++)
+		{
+			long x = (long)(rand.nextDouble()*(2000 - 0));
+			long y = RSA.relPrime(x, rand);
+			assertEquals(true, RSA.isRelativelyPrime(x, y));
+		}
+	}
+	
 }

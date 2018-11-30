@@ -22,17 +22,12 @@ class UnitTests {
 		System.out.flush();
 		System.setOut(old);
 		
-		// See what happened
-		System.out.print(stdout.toString());
-		
 		assertEquals("101 102 103 -5 -632145 183085 0\r\n", stdout.toString());
 	}
 	
 	@Test
 	void isPrimeTest()
 	{
-
-		
 		// Primes
 		assertEquals(true, RSA.isPrime(2));
 		assertEquals(true, RSA.isPrime(3));
@@ -117,6 +112,22 @@ class UnitTests {
 			long y = RSA.relPrime(x, rand);
 			assertEquals(true, RSA.isRelativelyPrime(x, y));
 		}
+	}
+	
+	@Test
+	void toLongTest()
+	{
+		// Index out of bounds
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+					RSA.toLong("12345", 10);	
+					});
+		
+		
+		// Correct indeces
+		assertEquals(12, RSA.toLong("12345678", 0));
+		assertEquals(34, RSA.toLong("12345678", 2));
+		assertEquals(56, RSA.toLong("12345678", 4));
+		assertEquals(78, RSA.toLong("12345678", 6));		
 	}
 	
 }

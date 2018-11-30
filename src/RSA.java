@@ -34,6 +34,9 @@ public class RSA
 			System.out.println(x + " " + y + " " + isRelativelyPrime(x, y));
 		}
 		
+		String chars = "84671850";
+		System.out.println(chars.substring(0, 2));
+		System.out.println(Long.parseLong(chars.substring(0, 2)));
 		
 	}// end main
 	
@@ -182,7 +185,14 @@ public class RSA
 	 */
 	public static long toLong(String msg, int p)
 	{
-		return -1;
+		if(p >= msg.length() - 1)
+		{
+			throw new IndexOutOfBoundsException("toLong: p or p+1 is larger than length of input String.");
+		}
+		
+		String nums = msg.substring(p, p+2);	// end index is exclusive
+		
+		return Long.parseLong(nums);
 	}
 	
 	

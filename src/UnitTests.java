@@ -117,10 +117,10 @@ class UnitTests {
 	@Test
 	void toLongTest()
 	{
-		// Index out of bounds
+		// Index out of bounds, throws exception
 		assertThrows(IndexOutOfBoundsException.class, () -> {
-					RSA.toLong("12345", 10);	
-					});
+			RSA.toLong("12345", 10);	
+			});
 		
 		
 		// Correct indeces
@@ -128,6 +128,30 @@ class UnitTests {
 		assertEquals(34, RSA.toLong("12345678", 2));
 		assertEquals(56, RSA.toLong("12345678", 4));
 		assertEquals(78, RSA.toLong("12345678", 6));		
+	}
+	
+	@Test
+	void longTo2CharsTest()
+	{
+		// long is larger than 2 digits, throws exception
+		assertThrows(IllegalArgumentException.class, () -> {
+			RSA.longTo2Chars(100);	
+			});
+		
+		// long is negative, throws exception
+		assertThrows(IllegalArgumentException.class, () -> {
+			RSA.longTo2Chars(-1);	
+			});
+		
+		// long can be broken into 2 chars
+		assertEquals("99", RSA.longTo2Chars(99));
+		assertEquals("35", RSA.longTo2Chars(35));
+		
+		// longs with only one digit still return 2 characters
+		assertEquals("01", RSA.longTo2Chars(1));
+		assertEquals("02", RSA.longTo2Chars(2));
+		assertEquals("03", RSA.longTo2Chars(3));
+		assertEquals("04", RSA.longTo2Chars(4));
 	}
 	
 }

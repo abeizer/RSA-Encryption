@@ -38,6 +38,7 @@ public class RSA
 		System.out.println(chars.substring(0, 2));
 		System.out.println(Long.parseLong(chars.substring(0, 2)));
 		
+		
 	}// end main
 	
 	/**
@@ -184,12 +185,13 @@ public class RSA
 	 * @param msg Contains at least two numeric chars
 	 * @param p Position in msg to start conversion from
 	 * @return the two digit number beginning at position p of msg as a long int
+	 * @throws IndexOutOfBoundsException
 	 */
 	public static long toLong(String msg, int p)
 	{
 		if(p >= msg.length() - 1)
 		{
-			throw new IndexOutOfBoundsException("toLong: p or p+1 is larger than length of input String.");
+			throw new IndexOutOfBoundsException("index p or p+1 is larger than length of input String.");
 		}
 		
 		String nums = msg.substring(p, p+2);	// end index is exclusive
@@ -202,9 +204,27 @@ public class RSA
 	 * Convert a long to 2 chars
 	 * @param x
 	 * @return The string made up of two numeric digits representing x
+	 * @throws IllegalArgumentException
 	 */
 	public static String longTo2Chars(long x)
 	{
-		return "";
+		if(x > 99)
+		{
+			throw new IllegalArgumentException("input cannot be more than 2 digits long.");
+		}
+		if(x < 0)
+		{
+			throw new IllegalArgumentException("input cannot be negative.");
+		}
+		
+		String chars = Long.toString(x);
+		
+		// If long only has one digit, then precede it with a 0
+		if(x < 10)
+		{
+			chars = "0".concat(chars);
+		}
+		
+		return chars;
 	}
 }

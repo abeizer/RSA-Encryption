@@ -162,6 +162,13 @@ public class RSA
 		return p;
 	}
 	
+	/**
+	 * @author Abby Beizer
+	 * Return whether the two numbers passed are relatively prime.
+	 * @param a 
+	 * @param b
+	 * @return true if a and b are relatively prime
+	 */
 	public static boolean isRelativelyPrime(long a, long b)
 	{
 		// This finds the gcd (greatest common divisor), a
@@ -201,6 +208,7 @@ public class RSA
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Convert a long to 2 chars
 	 * @param x
 	 * @return The string made up of two numeric digits representing x

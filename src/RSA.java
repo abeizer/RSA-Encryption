@@ -141,6 +141,7 @@ public class RSA
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Find a random number relatively prime to a given long int
 	 * @param n
 	 * @param rand
@@ -178,6 +179,7 @@ public class RSA
 	
 	
 	/**
+	 * @author Abby Beizer
 	 * Convert two numeric chars to long int
 	 * @param msg Contains at least two numeric chars
 	 * @param p Position in msg to start conversion from

@@ -42,6 +42,7 @@ public class RSA
 	}// end main
 	
 	/**
+	 * @author Zachary Reynolds
 	 * Find the multiplicative inverse of a long int 
 	 * (e^(-1) (mod m))
 	 * @param e The long to find an inverse for, mod m
@@ -50,7 +51,40 @@ public class RSA
 	 */
 	public static long inverse(long e, long m)
 	{
-		return -1;
+		long ans = 0;
+		long u1 = 0;
+		long u2 = 1;
+		long u3;
+		
+
+		long q = m/e;
+		long r = m - (q * e);
+		long r2 = e;
+		while ((r > 1))
+		{
+			u3 = u1 - (q * u2);
+			u1 = u2;
+			u2 = u3;
+			q = r2/r;
+			long r3 = r;
+			r = r2 - (r * q);
+			r2 = r3;
+			
+			
+		}
+		
+		if(r == 1)
+		{
+			u3 = u1 - (q * u2);
+			
+			if(u3 < 0)
+			{
+				ans = u3 + m;
+			}
+			else
+				ans = u3 % m;
+		}
+		return ans;
 	}
 	
 	
@@ -75,6 +109,7 @@ public class RSA
 	
 	
 	/**
+	 * @author Zachary Reynolds
 	 * Raise a number, b, to a power, p, modulo m
 	 * @param b Base number
 	 * @param p Power (raise b to the p)
@@ -83,7 +118,32 @@ public class RSA
 	 */
 	public static long modPower(long b, long p, long m)
 	{
-		return -1;
+		int e = 1;
+		for(int x = 0; x < (p); x++)
+		{
+			e = e * 2;
+			if(e > p)
+			{
+				e = e/2;
+				break;
+			}		
+		} 
+		int num = e;
+		long ans = (long) Math.pow(b,e) % m;
+		while(e > 1)
+		{
+			e = e/2;
+			if(!(num + e > p))
+			{
+				long a = (long) Math.pow(b,e);
+				ans = (a * ans) % m;
+				num = num + e;
+			}
+			
+		}
+		
+
+		return ans;
 	}
 	
 	

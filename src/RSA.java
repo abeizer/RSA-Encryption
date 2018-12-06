@@ -17,6 +17,10 @@ public class RSA
 	 */
 	public static void main(String[] args)
 	{
+		Person Alice = new Person();
+		Person Bob = new Person();
+		String msg = new String ("Bob, let's have lunch.");
+		Alice.decrypt(Bob.encryptTo(msg, Alice));
 		show(new long[]{101, 504, 66, -826});
 		
 		/*

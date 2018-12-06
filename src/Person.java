@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Used to test public-key crypto-system, RSA
  */
@@ -7,6 +12,9 @@ public class Person
 	
 	private long publicModulus;
 	private long encryptionExponent;
+	private long privateKey;
+	private long decryptionExponent;
+	private long d;
 
 	/**
 	 * Generate a public key for this person, consisting of exponent, e, and modulus, m.
@@ -15,9 +23,27 @@ public class Person
 	 */
 	public Person()
 	{
-		
+		long p;
+		long q;
+		long n;
+		Random rand = new Random();
+		while (true) {
+            p = (long) (Math.random() * (20000-16384) + 128);
+            if(RSA.isPrime(p)) {
+            	break;
+            }
+        }
+		while (true) {
+            q = (long) (Math.random() * (200-128) + 128);
+            if(RSA.isPrime(q)) {
+            	break;
+            }
+        }
+		publicModulus = p*q;
+		n = (p-1) * (q-1);
+		encryptionExponent = RSA.relPrime(n, rand);
+		d = RSA.inverse(encryptionExponent, n);
 	}
-	
 	
 	/**
 	 * Access the public modulus
@@ -47,7 +73,24 @@ public class Person
 	 */
 	public long[] encryptTo(String msg, Person she)
 	{
-		return new long[0];
+		List<String> stringArray = new ArrayList<String>();
+        int len = msg.length();
+        for (int i = 0; i < len; i += 2)
+        {
+        	stringArray.add(msg.substring(i, Math.min(len, i + 2)));
+        }
+        int arrayLength = stringArray.size();
+        long[] longArray = new long[arrayLength];
+        for(int i = 0; i < arrayLength; i++) {
+        	String character = stringArray.get(i);
+        	long value = ((long) character.charAt(0) * 128) + character.charAt(1);
+        	longArray[i] = value;
+        }
+        for(int i = 0; i < longArray.length; i++) {
+        	long encryptedValue = RSA.modPower(longArray[i], she.getE(), she.getM());
+        	longArray[i] = encryptedValue;
+        }
+		return longArray;
 	}
 	
 	
@@ -58,7 +101,19 @@ public class Person
 	 */
 	public String decrypt(long[] cipher)
 	{
-		return "";
+		long[] decryptedArray = new long[cipher.length];
+		ArrayList<String> stringArray = new ArrayList<String>();
+		for(int i = 0; i < cipher.length; i++) {
+			long decryptedValue = RSA.modPower(cipher[i], d, publicModulus);
+			decryptedArray[i] = decryptedValue;
+		}
+		for(int i = 0; i <decryptedArray.length; i++) {
+			long number = decryptedArray[i];
+			String str = Character.toString((char) (number/128));
+			str = str + (char) (number%128);
+			stringArray.add(str);
+		}
+		return String.join("", stringArray);
 	}
 	
 }

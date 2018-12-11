@@ -1,4 +1,6 @@
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -20,7 +22,11 @@ public class RSA
 		Person Alice = new Person();
 		Person Bob = new Person();
 		String msg = new String ("Bob, let's have lunch.");
-		Alice.decrypt(Bob.encryptTo(msg, Alice));
+		System.out.println("Original Message: " + msg);
+		long[] encryptedMsg = Bob.encryptTo(msg, Alice);
+		System.out.println("Encrypted Message: " + Arrays.toString(encryptedMsg));
+		String decryptedMsg = Alice.decrypt(encryptedMsg);
+		System.out.println("Decrypted Message: " + decryptedMsg);
 		show(new long[]{101, 504, 66, -826});
 		
 		/*
@@ -113,7 +119,7 @@ public class RSA
 	
 	
 	/**
-	 * @author Zachary Reynolds
+	 * @author Zachary Reynolds + Matthew Mallon
 	 * Raise a number, b, to a power, p, modulo m
 	 * @param b Base number
 	 * @param p Power (raise b to the p)
@@ -122,32 +128,23 @@ public class RSA
 	 */
 	public static long modPower(long b, long p, long m)
 	{
-		int e = 1;
-		for(int x = 0; x < (p); x++)
-		{
-			e = e * 2;
-			if(e > p)
-			{
-				e = e/2;
-				break;
-			}		
-		} 
-		int num = e;
-		long ans = (long) Math.pow(b,e) % m;
-		while(e > 1)
-		{
-			e = e/2;
-			if(!(num + e > p))
-			{
-				long a = (long) Math.pow(b,e);
-				ans = (a * ans) % m;
-				num = num + e;
-			}
-			
+		int highestPower = 1;
+		long answer = 1;
+		HashMap<Integer, Long> powerMap = new HashMap<Integer, Long>();
+		powerMap.put(1, b);
+		for(int i = 2; i < p; i = i*2) {
+			powerMap.put(i, (long) Math.pow(powerMap.get(i/2), 2) % m);
+			highestPower = i;
 		}
-		
-
-		return ans;
+		long power = p;
+		for(int i = highestPower; i >= 1; i = i/2) {
+			if(power >= i) {
+				power= power - i;
+				answer = (answer * powerMap.get(i)) % m;
+			}
+			highestPower = highestPower/2;
+		}
+		return answer;
 	}
 	
 	

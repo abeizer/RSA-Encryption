@@ -5,6 +5,7 @@ import java.util.Random;
 
 /**
  * Used to test public-key crypto-system, RSA
+ * @author Matthew Mallon
  */
 
 public class Person 
@@ -17,6 +18,7 @@ public class Person
 	private long d;
 
 	/**
+	 * @author Matthew Mallon
 	 * Generate a public key for this person, consisting of exponent, e, and modulus, m.
 	 * Generate a private key, consisting of an exponent, d.
 	 * Provide access to the public key only.
@@ -46,6 +48,7 @@ public class Person
 	}
 	
 	/**
+	 * @author Matthew Mallon
 	 * Access the public modulus
 	 * @return The public modulus for this Person
 	 */
@@ -56,6 +59,7 @@ public class Person
 	
 	
 	/**
+	 * @author Matthew Mallon
 	 * Access the public encryption exponent
 	 * @return The public encryption exponent for this Person
 	 */
@@ -66,6 +70,7 @@ public class Person
 	
 	
 	/**
+	 * @author Matthew Mallon
 	 * Encrypt a plain text message to she.
 	 * @param msg A plain-text message to encrypt for she
 	 * @param she The Person receiving the encrypted message.
@@ -95,6 +100,7 @@ public class Person
 	
 	
 	/**
+	 * @author Matthew Mallon
 	 * Decrypt the cipher text
 	 * @param cipher The cipher text this Person will decrypt
 	 * @return A string of the plain text
